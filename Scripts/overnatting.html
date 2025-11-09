@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y072JJSB9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0Y072JJSB9');
+  </script>
+  
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Overnatting – Hilde og Krishna</title>
+  <meta name="description" content="Overnatting"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div id="password-overlay" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(252,254,252,0.98);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+    <div style="background:var(--paper);padding:32px 24px;border-radius:22px;box-shadow:0 6px 20px rgba(0,0,0,.08);max-width:320px;width:100%;text-align:center;">
+      <h2 style="margin-bottom:18px;font-size:22px;color:var(--heading);font-family:Playfair Display,serif;">Skriv inn passord</h2>
+      <input id="pw-input" type="password" placeholder="Passord" style="padding:10px 16px;font-size:18px;border-radius:8px;border:1px solid var(--border);width:100%;margin-bottom:18px;">
+      <button id="pw-btn" style="background:var(--rose-deep);color:#fff;padding:10px 24px;border:none;border-radius:8px;font-size:18px;font-weight:700;cursor:pointer;width:100%;">Åpne</button>
+      <div id="pw-error" style="color:#c00;margin-top:12px;font-size:15px;display:none;">Feil passord, prøv igjen.</div>
+    </div>
+  </div>
+  <script>
+    // Check if password was already entered
+    if (localStorage.getItem('wedding-access') === 'granted') {
+      document.getElementById('password-overlay').style.display = 'none';
+    }
+    
+    document.getElementById('pw-btn').onclick = function() {
+      var pw = document.getElementById('pw-input').value;
+      if (pw === 'Jippi!') {
+        localStorage.setItem('wedding-access', 'granted');
+        document.getElementById('password-overlay').style.display = 'none';
+      } else {
+        document.getElementById('pw-error').style.display = 'block';
+      }
+    };
+    document.getElementById('pw-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') document.getElementById('pw-btn').click();
+    });
+  </script>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo"><a href="index.html">Hilde &amp; Krishna</a></div>
+    </div>
+    <div class="container header-inner">
+      <div class="countdown" id="countdown">
+        <div>
+          <div class="num" id="days">0</div>
+          <div class="lbl">dager</div>
+        </div>
+        <div>
+          <div class="num" id="hours">0</div>
+          <div class="lbl">timer</div>
+        </div>
+        <div>
+          <div class="num" id="minutes">0</div>
+          <div class="lbl">min</div>
+        </div>
+      </div>
+    </div>
+    <div class="container header-inner">
+      <nav class="nav" data-nav>
+        <a href="informasjon.html">Praktisk informasjon</a>
+        <a href="overnatting.html" class="active">Overnatting</a>
+        <a href="transport.html">Transport og parkering</a>
+        <a href="sporsmal.html">Spørsmål og svar</a>
+        <a href="rsvp.html">RSVP</a>
+        <a href="onskeliste.html">Ønskeliste</a>
+      </nav>
+      <button class="menu" aria-label="Meny" data-menu>
+        <svg width="28" height="28" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <script>
+    (function() {
+      const endDate = new Date('2026-05-23T00:00:00+02:00').getTime();
+      function updateCountdown() {
+    const now = new Date().getTime();
+    let diff = endDate - now;
+    if (diff < 0) diff = 0;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+    document.getElementById('days').textContent = days;
+    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+      }
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    })();
+  </script>
+
+  <main class="section">
+    <div class="container page-decorations">
+      <!-- Decorative images -->
+      <img src="pynt_1.png" alt="" class="decoration-img left" style="top: 50px;">
+      <img src="pynt_1.png" alt="" class="decoration-img right" style="top: 50px;">
+      <img src="pynt_2.png" alt="" class="decoration-img left" style="top: 400px;">
+      <img src="pynt_2.png" alt="" class="decoration-img right" style="top: 400px;">
+      
+      <h2 class="h2">Overnatting på Dömle</h2>
+      <p>Vi er så heldige å ha hele herregården til disposisjon for dere, og det er nok sengeplasser til alle!</p>
+      <p>
+        Bryllupet går gjennom hele helgen, fra fredag til søndag, og vi er så heldige at vi har herregården for oss selv! 
+        Rommene er altså forhåndsreservert, men dette ønsker vi at gjestene selv dekker. Det meste utover dette, som mat, en del drikke og aktiviteter (ikke golf) dekker vi.
+      </p>
+      <p>
+        Det koster 2250kr per person for opphold gjennom hele helgen. Det kan betales til kontonummer <span style="position:relative;display:inline-block;">6206.20.53068<button onclick="copyToClipboard('62062053068', this)" style="margin-left: 8px; padding: 6px 10px; background: var(--rose-deep); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; justify-content: center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button></span> innen 1. april 2026. Vi ordner romplassering ut ifra hva vi tror er best, men man kan gjerne sende inn ønsket rompartner i <a href="rsvp.html" style="text-decoration:underline;">RSVPen</a> om ønskelig.
+        </p>
+
+      <h3 class="h2">Soveplasser</h3>
+      <p>Rommene er plassert på forskjellige steder rundt herregården. Dere vil bli plassert på rom i hovedbygget, nordre og søndre fløy, samt sjøgården og frugården. Se kart i <a href="informasjon.html" style="text-decoration:underline;">Praktisk informasjon</a> for mer detaljer.</p>
+
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="brand">Hilde &amp; Krishna</div>
+      <div style="color:var(--muted)">© <span id="year"></span> Hilde &amp; Krishna</div>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+  <script>
+    function copyToClipboard(text, button) {
+      navigator.clipboard.writeText(text).then(function() {
+        // Change to checkmark icon temporarily
+        var originalHTML = button.innerHTML;
+        button.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+        button.style.background = '#4a9a4a';
+        
+        // Reset after 2 seconds
+        setTimeout(function() {
+          button.innerHTML = originalHTML;
+          button.style.background = 'var(--rose-deep)';
+        }, 2000);
+      }).catch(function(err) {
+        console.error('Could not copy text: ', err);
+      });
+    }
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

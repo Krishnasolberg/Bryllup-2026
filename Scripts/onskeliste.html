@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y072JJSB9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0Y072JJSB9');
+  </script>
+  
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Ønskeliste – Hilde og Krishna</title>
+  <meta name="description" content="Ønskeliste"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div id="password-overlay" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(252,254,252,0.98);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+    <div style="background:var(--paper);padding:32px 24px;border-radius:22px;box-shadow:0 6px 20px rgba(0,0,0,.08);max-width:320px;width:100%;text-align:center;">
+      <h2 style="margin-bottom:18px;font-size:22px;color:var(--heading);font-family:Playfair Display,serif;">Skriv inn passord</h2>
+      <input id="pw-input" type="password" placeholder="Passord" style="padding:10px 16px;font-size:18px;border-radius:8px;border:1px solid var(--border);width:100%;margin-bottom:18px;">
+      <button id="pw-btn" style="background:var(--rose-deep);color:#fff;padding:10px 24px;border:none;border-radius:8px;font-size:18px;font-weight:700;cursor:pointer;width:100%;">Åpne</button>
+      <div id="pw-error" style="color:#c00;margin-top:12px;font-size:15px;display:none;">Feil passord, prøv igjen.</div>
+    </div>
+  </div>
+  <script>
+    // Check if password was already entered
+    if (localStorage.getItem('wedding-access') === 'granted') {
+      document.getElementById('password-overlay').style.display = 'none';
+    }
+    
+    document.getElementById('pw-btn').onclick = function() {
+      var pw = document.getElementById('pw-input').value;
+      if (pw === 'Jippi!') {
+        localStorage.setItem('wedding-access', 'granted');
+        document.getElementById('password-overlay').style.display = 'none';
+      } else {
+        document.getElementById('pw-error').style.display = 'block';
+      }
+    };
+    document.getElementById('pw-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') document.getElementById('pw-btn').click();
+    });
+  </script>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo"><a href="index.html">Hilde &amp; Krishna</a></div>
+    </div>
+    <div class="container header-inner">
+      <div class="countdown" id="countdown">
+        <div>
+          <div class="num" id="days">0</div>
+          <div class="lbl">dager</div>
+        </div>
+        <div>
+          <div class="num" id="hours">0</div>
+          <div class="lbl">timer</div>
+        </div>
+        <div>
+          <div class="num" id="minutes">0</div>
+          <div class="lbl">min</div>
+        </div>
+      </div>
+    </div>
+    <div class="container header-inner">
+      <nav class="nav" data-nav>
+        <a href="informasjon.html">Praktisk informasjon</a>
+        <a href="overnatting.html">Overnatting</a>
+        <a href="transport.html">Transport og parkering</a>
+        <a href="sporsmal.html">Spørsmål og svar</a>
+        <a href="rsvp.html">RSVP</a>
+        <a href="onskeliste.html" class="active">Ønskeliste</a>
+      </nav>
+      <button class="menu" aria-label="Meny" data-menu>
+        <svg width="28" height="28" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <script>
+    (function() {
+      const endDate = new Date('2026-05-23T00:00:00+02:00').getTime();
+      function updateCountdown() {
+    const now = new Date().getTime();
+    let diff = endDate - now;
+    if (diff < 0) diff = 0;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+    document.getElementById('days').textContent = days;
+    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+      }
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    })();
+  </script>
+
+  <main class="section">
+    <div class="container page-decorations">
+      <!-- Decorative images -->
+      <img src="pynt_1.png" alt="" class="decoration-img left" style="top: 50px;">
+      <img src="pynt_1.png" alt="" class="decoration-img right" style="top: 50px;">
+      <img src="pynt_2.png" alt="" class="decoration-img left" style="top: 400px;">
+      <img src="pynt_2.png" alt="" class="decoration-img right" style="top: 400px;">
+      
+      <h2 class="h2">Ønskeliste</h2>
+      <p style="text-align: center;">Mest av alt ønsker vi at så mange som mulig kan komme og feire med oss! Om du ønsker å gi noe utover dette, har vi en ønskeliste under.</p>
+      
+      <!-- Safari/Honeymoon Card -->
+      <div class="card" style="margin-bottom: 2rem;">
+        <h3 style="color: var(--heading); margin-top: 0; margin-bottom: 16px; font-size: 20px;">🦁 Bryllupsreise - Safari</h3>
+        <p>Vi elsker å reise, og vår drøm er å dra på safari. Øverst på vår ønskeliste er et bidrag til dette.</p>
+        <p>
+          <strong>Kontonummer:</strong> 6206 20 53068 
+          <button onclick="copyToClipboard('62062053068', this)" style="margin-left: 8px; padding: 6px 10px; background: var(--rose-deep); color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; display: inline-flex; align-items: center; justify-content: center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+          </button>
+        </p>
+      </div>
+
+      <!-- Wishlist Items Section -->
+      <h3 class="h2" style="margin-top: 3rem; margin-bottom: 1.5rem;">Andre ønsker (work in progress)</h3>
+      <p style="text-align: center; margin-bottom: 2rem; color: var(--muted);">Klikk på en vare for å se mer informasjon og markere at du vil kjøpe den.</p>
+      
+      <div id="wishlist-container" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+        <!-- Wishlist items will be loaded here by JavaScript -->
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="brand">Hilde &amp; Krishna</div>
+      <div style="color:var(--muted)">© <span id="year"></span> Hilde &amp; Krishna</div>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+  <script>
+    function copyToClipboard(text, button) {
+      navigator.clipboard.writeText(text).then(function() {
+        // Change to checkmark icon temporarily
+        var originalHTML = button.innerHTML;
+        button.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+        button.style.background = '#4a9a4a';
+        
+        // Reset after 2 seconds
+        setTimeout(function() {
+          button.innerHTML = originalHTML;
+          button.style.background = 'var(--rose-deep)';
+        }, 2000);
+      }).catch(function(err) {
+        console.error('Could not copy text: ', err);
+      });
+    }
+
+    // Google Apps Script URL
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwKCRrmsMdJhE0B0-rj_0noY7DqaWOKeye_QOJ8S8JJn3rhv9aDbmj6A98Q14DgWrFK/exec';
+    
+    let wishlistItems = [];
+
+    // Load wishlist from Google Sheets
+    async function loadWishlist() {
+      try {
+        const response = await fetch(APPS_SCRIPT_URL);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log('Loaded wishlist data:', data);
+        wishlistItems = data;
+        renderWishlist();
+      } catch (error) {
+        console.error('Feil ved lasting av ønskeliste:', error);
+        alert('Kunne ikke laste ønskelisten. Vennligst prøv igjen senere.\n\nFeilmelding: ' + error.message);
+      }
+    }
+
+    // Render wishlist items
+    function renderWishlist() {
+      const container = document.getElementById('wishlist-container');
+      
+      if (wishlistItems.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: var(--muted); padding: 2rem;">Laster ønskeliste...</p>';
+        return;
+      }
+      
+      container.innerHTML = '';
+
+      wishlistItems.forEach(item => {
+        const remaining = item.quantity - item.purchased;
+        const allPurchased = remaining === 0;
+
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.style.cssText = 'position: relative; overflow: hidden; cursor: pointer; transition: transform 0.2s;' + (allPurchased ? ' opacity: 0.6;' : '');
+        
+        card.innerHTML = `
+          <div style="position: relative; width: 100%; padding-top: 100%; background: #f5f5f5; border-radius: 12px; overflow: hidden; margin-bottom: 12px;">
+            <img src="${item.image}" alt="${item.name}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://via.placeholder.com/300x300?text=Bilde'">
+            ${allPurchased ? '<div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(74, 154, 74, 0.8); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold;">✓ Kjøpt</div>' : ''}
+          </div>
+          <h4 style="margin: 0 0 8px 0; color: var(--heading); font-size: 18px;">${item.name}</h4>
+          <p style="margin: 0 0 12px 0; font-size: 14px; color: var(--muted); line-height: 1.4;">${item.description}</p>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <span style="font-size: 14px; color: var(--muted);">
+              <strong>${remaining}</strong> av <strong>${item.quantity}</strong> gjenstår
+            </span>
+            ${allPurchased ? '<span style="font-size: 12px; padding: 4px 8px; background: #4a9a4a; color: white; border-radius: 4px;">Fullført</span>' : '<span style="font-size: 12px; padding: 4px 8px; background: var(--rose); color: white; border-radius: 4px;">Tilgjengelig</span>'}
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <a href="${item.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="flex: 1; padding: 8px; background: var(--border); color: var(--heading); text-align: center; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 600;">
+              Se vare
+            </a>
+            <button onclick="${!allPurchased ? `markAsPurchased(${item.id}); event.stopPropagation();` : 'event.stopPropagation();'}" ${allPurchased ? 'disabled' : ''} style="flex: 1; padding: 8px; background: ${allPurchased ? '#ccc' : 'var(--rose-deep)'}; color: white; border: none; border-radius: 6px; cursor: ${allPurchased ? 'not-allowed' : 'pointer'}; font-size: 14px; font-weight: 600; opacity: ${allPurchased ? '0.6' : '1'};">
+              ${allPurchased ? 'Utsolgt' : 'Jeg kjøper!'}
+            </button>
+          </div>
+        `;
+
+        card.addEventListener('mouseenter', function() {
+          if (!allPurchased) this.style.transform = 'translateY(-4px)';
+        });
+        card.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0)';
+        });
+
+        container.appendChild(card);
+      });
+    }
+
+    // Mark item as purchased
+    async function markAsPurchased(itemId) {
+      const item = wishlistItems.find(i => i.id === itemId);
+      if (!item || item.purchased >= item.quantity) {
+        return;
+      }
+      
+      const confirmed = confirm('Er du sikker på at du vil registrere denne?');
+      if (!confirmed) return;
+      
+      try {
+        const response = await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          body: JSON.stringify({
+            action: 'purchase',
+            itemId: itemId,
+            buyerName: 'Anonym'
+          })
+        });
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const result = await response.json();
+        console.log('Purchase result:', result);
+        
+        if (result.success) {
+          alert('Registrert!');
+          // Reload the wishlist to show updated data
+          await loadWishlist();
+        } else {
+          alert('Noe gikk galt. Vennligst prøv igjen.');
+        }
+      } catch (error) {
+        console.error('Feil ved kjøp:', error);
+        alert('Kunne ikke registrere kjøpet. Vennligst prøv igjen.\n\nFeilmelding: ' + error.message);
+      }
+    }
+
+    // Initialize - load wishlist when page loads
+    loadWishlist();
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

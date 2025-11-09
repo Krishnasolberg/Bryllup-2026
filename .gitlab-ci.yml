@@ -1,0 +1,18 @@
+---
+include:
+  - project: "pipelines/linting"
+    ref: v0
+    file: lint.yml
+  - project: "pipelines/python-build"
+    ref: v6.0.4
+    file: 'python-project.yml'
+
+variables:
+  PKG_NAME: "krishna_og_hilde_bryllup"
+  PROJECT_NAME: "krishna-og-hilde-bryllup"
+  PACKAGE_MANAGER: "poetry"
+  PYTHON_VERSIONS: "/(3.13)/"
+  PYTHON_PUBLISH_VERSION: "3.13"
+  RUFF_LINT_ENABLED: "true"
+  FILE_LINT_ENABLED: "true"
+  SONAR_SOURCES: "src"

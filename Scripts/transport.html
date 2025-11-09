@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0Y072JJSB9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0Y072JJSB9');
+  </script>
+  
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Transport og parkering – Hilde og Krishna</title>
+  <meta name="description" content="Transport og parkering"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div id="password-overlay" style="position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(252,254,252,0.98);z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+    <div style="background:var(--paper);padding:32px 24px;border-radius:22px;box-shadow:0 6px 20px rgba(0,0,0,.08);max-width:320px;width:100%;text-align:center;">
+      <h2 style="margin-bottom:18px;font-size:22px;color:var(--heading);font-family:Playfair Display,serif;">Skriv inn passord</h2>
+      <input id="pw-input" type="password" placeholder="Passord" style="padding:10px 16px;font-size:18px;border-radius:8px;border:1px solid var(--border);width:100%;margin-bottom:18px;">
+      <button id="pw-btn" style="background:var(--rose-deep);color:#fff;padding:10px 24px;border:none;border-radius:8px;font-size:18px;font-weight:700;cursor:pointer;width:100%;">Åpne</button>
+      <div id="pw-error" style="color:#c00;margin-top:12px;font-size:15px;display:none;">Feil passord, prøv igjen.</div>
+    </div>
+  </div>
+  <script>
+    // Check if password was already entered
+    if (localStorage.getItem('wedding-access') === 'granted') {
+      document.getElementById('password-overlay').style.display = 'none';
+    }
+    
+    document.getElementById('pw-btn').onclick = function() {
+      var pw = document.getElementById('pw-input').value;
+      if (pw === 'Jippi!') {
+        localStorage.setItem('wedding-access', 'granted');
+        document.getElementById('password-overlay').style.display = 'none';
+      } else {
+        document.getElementById('pw-error').style.display = 'block';
+      }
+    };
+    document.getElementById('pw-input').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') document.getElementById('pw-btn').click();
+    });
+  </script>
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo"><a href="index.html">Hilde &amp; Krishna</a></div>
+    </div>
+    <div class="container header-inner">
+      <div class="countdown" id="countdown">
+        <div>
+          <div class="num" id="days">0</div>
+          <div class="lbl">dager</div>
+        </div>
+        <div>
+          <div class="num" id="hours">0</div>
+          <div class="lbl">timer</div>
+        </div>
+        <div>
+          <div class="num" id="minutes">0</div>
+          <div class="lbl">min</div>
+        </div>
+      </div>
+    </div>
+    <div class="container header-inner">
+      <nav class="nav" data-nav>
+        <a href="informasjon.html">Praktisk informasjon</a>
+        <a href="overnatting.html">Overnatting</a>
+        <a href="transport.html" class="active">Transport og parkering</a>
+        <a href="sporsmal.html">Spørsmål og svar</a>
+        <a href="rsvp.html">RSVP</a>
+        <a href="onskeliste.html">Ønskeliste</a>
+      </nav>
+      <button class="menu" aria-label="Meny" data-menu>
+        <svg width="28" height="28" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <script>
+    (function() {
+      const endDate = new Date('2026-05-23T00:00:00+02:00').getTime();
+      function updateCountdown() {
+    const now = new Date().getTime();
+    let diff = endDate - now;
+    if (diff < 0) diff = 0;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+    document.getElementById('days').textContent = days;
+    document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+      }
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    })();
+  </script>
+
+  <main class="section">
+    <div class="container page-decorations">
+      <!-- Decorative images -->
+      <img src="pynt_1.png" alt="" class="decoration-img left" style="top: 50px;">
+      <img src="pynt_1.png" alt="" class="decoration-img right" style="top: 50px;">
+      
+      <h2 class="h2">Transport og parkering</h2>
+      <p>Hele helgen finner sted på Dömle Herrgård, og det letteste er å komme dit med bil. Adressen er Dömle Herrgård, 669 91, Deje, Sverige.</p>
+
+      <p>Hvis du ikke har bil, kan du kontakte oss for å høre om det er mulighet for samkjøring.</p>
+
+      <p>Det er parkering på stedet, og det skal være nok plass til alle. Det er også mulighet for lading av elbil. Per nå er det fire ladepunkter med 9 kW effekt.
+        Det er mulig at det blir installert noen flere innen bryllupet. Det koster 200 SEK å lade opp batteriet.
+      </p>
+      <p>Alternativt kan man ta tog til Karlstad og buss videre til Deje. Herfra kan vi ordne med transport til Dömle. Gi oss i så fall beskjed i god tid før bryllupet.</p>
+      </p>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="brand">Hilde &amp; Krishna</div>
+      <div style="color:var(--muted)">© <span id="year"></span> Hilde &amp; Krishna</div>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+  <script src="script.js"></script>
+</body>
+</html>

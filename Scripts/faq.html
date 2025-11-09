@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>FAQ – Your Brand</title>
+  <meta name="description" content="FAQ – Your Brand"/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+<header class="header">
+  <div class="container navbar">
+    <a class="brand" href="index.html">
+      <span class="brand-badge"></span>
+      <span>Your Brand</span>
+    </a>
+    <nav class="nav-links" data-nav>
+      <a href="index.html">Hjem</a>
+      <a href="informasjon.html">Informasjon</a>
+      <a href="program.html">Program</a>
+      <a href="priser.html">Priser</a>
+      <a href="galleri.html">Galleri</a>
+      <a href="faq.html">FAQ</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+    <a href="kontakt.html" class="button nav-cta">Kontakt oss</a>
+    <button class="hamburger" aria-label="Open menu" data-toggle="mobile">
+      <svg width="24" height="24" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="container" style="padding:.5rem 0">
+      <a href="index.html">Hjem</a>
+      <a href="informasjon.html">Informasjon</a>
+      <a href="program.html">Program</a>
+      <a href="priser.html">Priser</a>
+      <a href="galleri.html">Galleri</a>
+      <a href="faq.html">FAQ</a>
+      <a href="kontakt.html">Kontakt</a>
+    </div>
+  </div>
+</header>
+
+  <main>
+    <section class="container section">
+
+<div class="section-title"><h2>Ofte stilte spørsmål</h2><div class="rule"></div></div>
+<div class="card" data-accordion>
+  <button style="display:flex;justify-content:space-between;align-items:center;width:100%;font-weight:700">Hva bør jeg ta med? <span>+</span></button>
+  <div data-panel class="mt-2" style="display:block">Gode sko, vann, vindtett jakke og evt. snacks. Vi sender pakkeliste ved booking.</div>
+</div>
+<div class="card mt-2" data-accordion>
+  <button style="display:flex;justify-content:space-between;align-items:center;width:100%;font-weight:700">Kan turen avlyses? <span>+</span></button>
+  <div data-panel class="mt-2 hidden" style="display:none">Ved ekstremvær kan vi ombooke eller refundere etter avtale.</div>
+</div>
+<div class="card mt-2" data-accordion>
+  <button style="display:flex;justify-content:space-between;align-items:center;width:100%;font-weight:700">Tilbyr dere gavekort? <span>+</span></button>
+  <div data-panel class="mt-2 hidden" style="display:none">Ja, digitale gavekort med valgfritt beløp.</div>
+</div>
+
+    </section>
+  </main>
+
+<footer class="footer">
+  <div class="container row">
+    <div class="brand"><span class="brand-badge"></span><span>Your Brand</span></div>
+    <div class="muted" style="color:var(--muted)">© <span id="year"></span> Your Brand. Alle rettigheter forbeholdt.</div>
+  </div>
+</footer>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+  <script src="script.js"></script>
+</body>
+</html>

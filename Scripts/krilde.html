@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hilde & Krishna — Bryllup</title>
+  <meta name="description" content="Bryllupsnettsted med nedtelling, program, overnatting, transport og FAQ. Lett å tilpasse." />
+  <meta name="theme-color" content="#a2af9b" />
+  <style>
+    :root{
+      /* Pastel palette */
+      --bg: #a2af9b;          /* lys pastelgrønn bakgrunn */
+      --card: #faf9ee;        /* lyse kort */
+      --muted: #6b7280;       /* dempet grå tekst */
+      --text: #2f2f2f;        /* mørk tekst for kontrast */
+      --accent: #faf9ee;      /* pastel rosa aksent */
+      --accent-2: #faf9ee;    /* pastel blå aksent */
+      --radius: 22px;
+      --maxw: 1050px;
+      --border: #e5e7eb;      /* lys kantfarge */
+    }
+
+    html,body{height:100%}
+    body{
+      margin:0;
+      font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Inter, Helvetica, Arial, Noto Sans, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background: var(--bg);
+      background-attachment: fixed;
+    }
+    a{ color: #2563eb; text-decoration: none }
+    a:hover{ text-decoration: underline }
+    .container{ width:min(100%, var(--maxw)); margin:0 auto; padding-inline: 20px }
+
+    /* Skip link for a11y */
+    .skip{ position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden }
+    .skip:focus{ position:fixed; left:20px; top:20px; width:auto; height:auto; padding:10px 14px; z-index:1000; background:#000; color:#fff; border-radius:10px }
+
+    /* Header / hero */
+    header{ position:relative; padding-top: clamp(28px, 5vw, 64px); padding-bottom: 32px; background: var(--bg); }
+    .hero{
+      display:flex; flex-direction:column; gap:16px;
+    }
+
+    .hero-copy{ display:flex; flex-direction:column; justify-content:center; gap:18px }
+    h1{ font-size: clamp(34px, 6vw, 62px); line-height:1.05; margin:0 }
+    .muted{ color: var(--muted) }
+
+    .countdown{
+  display:flex;
+  justify-content: center;  /* ✅ centers horizontally */
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-top:20px;          /* ✅ gives space under image */
+}
+    .cd-box{ background: var(--card); border:1px solid var(--border); padding: 14px 16px; border-radius: 16px; min-width: 110px; text-align:center; box-shadow: 0 6px 16px #00000012 }
+    .cd-num{ font-variant-numeric: tabular-nums; font-size: clamp(26px, 4.5vw, 42px); font-weight:800; letter-spacing: 1px }
+    .cd-lbl{ text-transform: uppercase; font-size: 11px; letter-spacing: .14em; color:var(--muted) }
+
+    .btn{ display:inline-flex; align-items:center; gap:10px; padding: 12px 16px; border-radius: 12px; background: var(--accent); border:1px solid var(--border); color:#3a3a3a; cursor:pointer; text-decoration:none; box-shadow: 0 6px 18px #00000014 }
+    .btn:hover{ transform: translateY(-1px) }
+    .btn--accent{ background: var(--accent); }
+
+    /* Nav */
+    .nav-wrap{ position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px) saturate(1.2); background: #a2af9bb8; border-bottom:1px solid var(--border) }
+    .nav{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 20px }
+    .brand{ font-weight: 700; letter-spacing:.04em }
+    .menu{ display:flex; gap:16px; align-items:center }
+    .menu a{ color:#111827; opacity:.85 }
+    .menu a:hover{ opacity:1 }
+    @media (max-width: 820px){ .menu{ display:none } }
+
+    .hamb{ display:none; background:none; border:0; color:#111827; font-size: 20px; padding:10px; border-radius: 10px }
+    @media (max-width: 820px){ .hamb{ display:inline-flex } }
+
+    .drawer{ position:fixed; inset:0; display:none; background:#0006; backdrop-filter: blur(4px) }
+    .drawer.open{ display:block }
+    .drawer-panel{ position:absolute; right:0; top:0; bottom:0; width:min(86%, 400px); background:#ffffff; border-left:1px solid var(--border); padding:20px; overflow:auto }
+    .drawer a{ display:block; padding:14px 6px; border-bottom:1px solid var(--border); color:#111827 }
+
+    /* Sections */
+    section{ scroll-margin-top: 90px; }
+    .card{ background: var(--card); border:1px solid var(--border); border-radius: var(--radius); padding: clamp(18px, 3vw, 26px); box-shadow: 0 8px 22px #00000010 }
+    .grid{ display:grid; gap:16px }
+    .grid-2{ grid-template-columns: 1fr 1fr }
+    @media (max-width: 880px){ .grid-2{ grid-template-columns: 1fr } }
+
+    h2{ font-size: clamp(24px, 3.6vw, 34px); margin: 18px 0 }
+    h3{ font-size: 18px; margin:16px 0 8px }
+
+    /* Timeline */
+    .timeline{ position:relative; padding-left: 22px }
+    .timeline:before{ content:""; position:absolute; left:8px; top:0; bottom:0; width:2px; background:var(--border); border-radius:10px }
+    .tl-item{ position:relative; margin: 14px 0; padding-left: 6px }
+    .tl-item:before{ content:""; position:absolute; left:-2px; top:7px; width:12px; height:12px; background: var(--accent-2); border-radius:50%; box-shadow: 0 0 0 3px #fff }
+    .tl-time{ font-weight:700 }
+
+    /* FAQ */
+    details{ background: var(--card); border:1px solid var(--border); border-radius: 14px; padding: 14px 16px }
+    summary{ cursor: pointer; font-weight:600 }
+
+    /* Footer */
+    footer{ padding: 40px 20px; color: var(--muted); text-align:center }
+
+    /* Smooth scroll */
+    html{ scroll-behavior: smooth }
+
+    /* Print */
+    @media print{
+      body{ background:#fff; color:#000 }
+      .nav-wrap, .drawer { display:none !important }
+      .card{ box-shadow:none; border:1px solid #ccc }
+    }
+
+    /* Header image */
+    .hero-img{
+  width: 100%;
+  height: 60vh;
+  min-height: 250px;
+  object-fit: cover;
+  object-position: center 15%; /* adjust: left/center/right + % up/down */
+  border-radius: 0;
+  box-shadow: none;
+}
+  </style>
+</head>
+<body>
+
+  <a class="skip" href="#innhold">Hopp til innhold</a>
+
+  <!-- Sticky navigation -->
+  <div class="nav-wrap">
+    <nav class="nav container" aria-label="Hovedmeny">
+      <div class="brand" id="brand">Hilde & Krishna</div>
+      <div class="menu" id="menu">
+        <a href="#info">Informasjon</a>
+        <a href="#program">Program</a>
+        <a href="#overnatting">Overnatting</a>
+        <a href="#transport">Transport og parkering</a>
+        <a href="#faq">Spørsmål og svar</a>
+      </div>
+      <button class="hamb" id="hamb" aria-controls="skuff" aria-expanded="false" aria-label="Åpne meny">☰</button>
+    </nav>
+  </div>
+
+  <!-- Drawer for mobile -->
+  <div class="drawer" id="skuff" hidden>
+    <div class="drawer-panel">
+      <button class="btn" id="lukk" style="margin-bottom:10px">Lukk ✕</button>
+      <a href="#info">Informasjon</a>
+      <a href="#program">Program</a>
+      <a href="#overnatting">Overnatting</a>
+      <a href="#transport">Transport og parkering</a>
+      <a href="#faq">Spørsmål og svar</a>
+      <a id="rsvp-drawer" href="#" target="_blank" rel="noopener">RSVP</a>
+    </div>
+  </div>
+
+  <header id="innhold">
+    <div class="hero">
+      <!-- TEXT FIRST -->
+      <div class="hero-copy">
+        <h1 id="title" style="text-align:center">Velkommen til bryllup!</h1>
+        <p class="muted" id="lede" style="text-align:center">
+          Hilde & Krishna · <strong>23.05.2026</strong>
+        </p>
+
+      <!-- IMAGE SECOND -->
+      <img class="hero-img" src="krilde_forside.jpg" alt="Hilde & Krishna" />
+      <div class="countdown" aria-live="polite">
+        <div class="cd-box"><div class="cd-num" id="cd-days">0</div><div class="cd-lbl">dager</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-hours">00</div><div class="cd-lbl">timer</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-mins">00</div><div class="cd-lbl">min</div></div>
+        <a class="btn btn--accent" id="rsvp-hero" href="#" target="_blank" rel="noopener">RSVP ↗</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Informasjon -->
+    <section id="info" class="grid" aria-labelledby="h-info">
+      <h2 id="h-info">Kjære alle de fineste folkene vi vet om</h2>
+      <div class="card">
+        <p>Vi gleder oss enormt til å feire kjærligheten sammen med familie og venner denne helgen. Nedenfor finner du praktisk informasjon, program og svar på vanlige spørsmål. Bruk RSVP‑knappen for å registrere deltakelse innen <strong>01.01.2026</strong>.</p>
+        <div class="grid grid-2" style="margin-top:10px">
+          <div>
+            <h3>Innsjekk på hotellet</h3>
+            <p><strong>Fredag 22. mai fra 15:00</strong><br>Dömle Herrgård</p>
+          </div>
+          <div>
+            <h3>Tilgang på spa</h3>
+            <p><strong>Fredag 22. mai 16:00 - 20:00</strong><br>Dömle Herrgård</p>
+          </div>
+          <div>
+            <h3>Grillbuffet</h3>
+            <p><strong>Fredag 22. mai kl. 19:00</strong><br>Dömle Herrgård</p>
+          </div>
+          <div>
+            <h3>Frokost</h3>
+            <p><strong>Lørdag 23. mai kl. 08:00</strong><br>Dömle Herrgård</p>
+          </div>
+          <div>
+            <h3>Tilgang på spa + aktiviteter</h3>
+            <p><strong>Lørdag 23. mai kl. 09:00-12:00</strong><br>Dömle Herrgård</p>
+          </div>
+          <div>
+            <h3>Lunsj</h3>
+            <p><strong>Lørdag 23. mai kl. 12:00-13:00</strong><br>Dömle Herrgård</p>
+          </div>
+          <div>
+            <h3>Vielse</h3>
+            <p><strong>Lørdag 23. mai kl. 14:00-14:30</strong><br>Furøya</p>
+          </div>
+          <div>
+            <h3>Fredagstreff</h3>
+            <p><strong>7. august kl. 18:30</strong><br>Lyngør</p>
+          </div>
+          <div>
+            <h3>Kontakt</h3>
+            <p>Kontaktpersoner for dagen: <a href="mailto:forlover1@example.com">Forlover 1</a> og <a href="mailto:forlover2@example.com">Forlover 2</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Program -->
+    <section id="program" class="grid" aria-labelledby="h-prog">
+      <h2 id="h-prog">Program</h2>
+      <div class="card timeline">
+        <div class="tl-item"><div class="tl-time">Fredag 18:30</div><div>Uformelt treff og enkel servering i Lyngør. Kle deg etter vær og vind ☺</div></div>
+        <div class="tl-item"><div class="tl-time">Lørdag 13:45</div><div>Oppmøte ved kirken. Parkeringsmuligheter i nærheten, se kart under.</div></div>
+        <div class="tl-item"><div class="tl-time">14:30</div><div>Vielse i Dypvåg kirke.</div></div>
+        <div class="tl-item"><div class="tl-time">16:30</div><div>Aperitiff, middag og taler på Furøya.</div></div>
+        <div class="tl-item"><div class="tl-time">22:00</div><div>Kake, kaffe og dans! 🎶</div></div>
+        <div class="tl-item"><div class="tl-time">Søndag</div><div>Avreise/åpen brunch (kommer info senere).</div></div>
+      </div>
+    </section>
+
+    <!-- Overnatting -->
+    <section id="overnatting" class="grid" aria-labelledby="h-overn">
+      <h2 id="h-overn">Overnatting</h2>
+      <div class="grid grid-2">
+        <article class="card">
+          <h3>Hotell A (rabattkode)</h3>
+          <p>Ligger 10 min fra kirken. Bruk kode <code>BRYLLUP26</code> ved bestilling. <a href="#" target="_blank" rel="noopener">Til booking ↗</a></p>
+        </article>
+        <article class="card">
+          <h3>Hotell B</h3>
+          <p>Sentralt ved havna. Parkeringshus i kjelleren. <a href="#" target="_blank" rel="noopener">Til booking ↗</a></p>
+        </article>
+        <article class="card">
+          <h3>Hytter / Airbnb</h3>
+          <p>Det finnes mange flotte hytter i området. Søk i god tid for best utvalg.</p>
+        </article>
+        <article class="card">
+          <h3>Camping</h3>
+          <p>Plass for telt/bobil i nærheten av festlokalet (mer info kommer).</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Transport -->
+    <section id="transport" class="grid" aria-labelledby="h-trans">
+      <h2 id="h-trans">Transport og parkering</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Kom deg hit</h3>
+          <p>Nærmeste flyplass er <em>Kristiansand (KRS)</em>. Vi anbefaler samkjøring — koordiner gjerne i Facebook‑gruppen eller via forloverne.</p>
+          <ul>
+            <li>Buss fra Kristiansand til Tvedestrand: ca. 1 t 10 min</li>
+            <li>Taxi fra Tvedestrand til Dypvåg kirke: ca. 15 min</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Parkering</h3>
+          <p>Det er begrenset parkering ved kirken. Følg skilting og parkeringsvakter. Ved festlokalet anbefales parkering på anvist område.</p>
+          <p><a href="#" target="_blank" rel="noopener">Åpne kart ↗</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="grid" aria-labelledby="h-faq">
+      <h2 id="h-faq">Spørsmål og svar</h2>
+      <div class="grid">
+        <details class="card">
+          <summary>Gaver</summary>
+          <p>Det viktigste for oss er at du kommer. Ønsker du likevel å gi noe, setter vi pris på bidrag til bryllupsreise.</p>
+        </details>
+        <details class="card">
+          <summary>Kleskode</summary>
+          <p>Mørk dress / sommerlig pent. Ta gjerne med noe varmt til kvelden.</p>
+        </details>
+        <details class="card">
+          <summary>Allergier</summary>
+          <p>Gi beskjed i RSVP‑skjemaet, så tilpasser vi menyen.</p>
+        </details>
+        <details class="card">
+          <summary>Barn</summary>
+          <p>Vi elsker barn, men denne gangen blir det en voksenfest. Spør oss gjerne om unntak ved behov.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© <span id="year"></span> Hilde & Krishna — All you need is love.</p>
+      <p class="muted">Spørsmål? Ta kontakt på <a href="mailto:hei@example.com">hei@example.com</a></p>
+    </div>
+  </footer>
+
+  <script>
+  // —————— ENKEL KONFIG ——————
+  const CONFIG = {
+    coupleNames: "Hilde & Krishna",          // visningsnavn i header/meny
+    weddingDateISO: "2026-05-23T14:30:00+02:00", // lokal tid (Oslo tid)
+    rsvpUrl: "https://forms.office.com/Pages/ResponsePage.aspx", // bytt til deres lenke
+    rsvpDeadlineISO: "2026-01-01",       // frist som vises i intro-tekst
+    locations: {
+      ceremony: { label: "Dömle Herrgård", maps: "https://maps.google.com" },
+    }
+  };
+
+  // —————— Nedtelling ——————
+  const pad = n => String(n).padStart(2,'0');
+  const $d = id => document.getElementById(id);
+  const target = new Date(CONFIG.weddingDateISO).getTime();
+  function tick(){
+    const now = Date.now();
+    let diff = Math.max(0, target - now);
+    const days = Math.floor(diff / (1000*60*60*24)); diff -= days*24*60*60*1000;
+    const hours = Math.floor(diff / (1000*60*60)); diff -= hours*60*60*1000;
+    const mins = Math.floor(diff / (1000*60));
+    $d('cd-days').textContent = days;
+    $d('cd-hours').textContent = pad(hours);
+    $d('cd-mins').textContent = pad(mins);
+  }
+  tick(); setInterval(tick, 1000*20); // oppdater hvert 20. sekund (holder CPU lav)
+
+  // —————— Sett tekst/lenker fra CONFIG ——————
+  $d('brand').textContent = CONFIG.coupleNames;
+  document.querySelectorAll('#rsvp-hero, #rsvp-drawer').forEach(a=> a.href = CONFIG.rsvpUrl);
+  const deadline = new Date(CONFIG.rsvpDeadlineISO+'T00:00:00').toLocaleDateString('no-NO', { year:'numeric', month:'2-digit', day:'2-digit' });
+  document.getElementById('lede').innerHTML = `Den <strong>${new Date(CONFIG.weddingDateISO).toLocaleDateString('no-NO', {day:'2-digit', month:'2-digit', year:'numeric'})}</strong> gifter vi oss — og vi gleder oss til å feire med dere! 🥂`;
+
+  // —————— Mobilmeny ——————
+  const drawer = document.getElementById('skuff');
+  const hamb = document.getElementById('hamb');
+  const closeBtn = document.getElementById('lukk');
+  function openDrawer(){ drawer.classList.add('open'); drawer.hidden=false; hamb.setAttribute('aria-expanded','true'); }
+  function closeDrawer(){ drawer.classList.remove('open'); drawer.hidden=true; hamb.setAttribute('aria-expanded','false'); }
+  hamb.addEventListener('click', openDrawer);
+  closeBtn.addEventListener('click', closeDrawer);
+  drawer.addEventListener('click', (e)=>{ if(e.target===drawer) closeDrawer(); });
+  document.querySelectorAll('.drawer a').forEach(a=> a.addEventListener('click', closeDrawer));
+
+  // —————— Små forbedringer ——————
+  document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
